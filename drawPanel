@@ -1,0 +1,126 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
+import javax.swing.JPanel;
+import javax.xml.ws.Endpoint;
+
+public class drawPanel extends JPanel {
+	
+	private Color currentColor;
+
+	//private boolean isStart;
+	//private int startPointX , startPointY , endPointX , endPointY;
+	
+	private myLine[] m1=new myLine[100];
+	private int pointCount = -1;
+	
+	boolean flag;
+	
+	/**
+	 * Create the panel.
+	 */
+	public drawPanel() {
+		
+		flag=false;
+		
+		addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				//endX=e.getX();
+				//endY=e.getY();
+				
+				Point endpoint = e.getPoint();
+				repaint();
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+				//startX=e.getX();
+				//startY=e.getY();
+				flag=true;
+				
+			    m1[pointCount]=new myLine();
+				m1[pointCount].setStartPoint(e.getPoint());
+				pointCount++;
+				
+				
+				Point startPoint = e.getPoint();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		addMouseMotionListener(new MouseMotionListener() {
+			
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				// TODO Auto-generated method stub
+				//endX=e.getX();
+				//endY=e.getY();
+				Point endpoint = e.getPoint();
+				repaint();
+			}
+		});
+	}
+	
+	
+	//public void setStar(boolean isStar) {
+		//this.isStart=isStar;
+	//}
+	/*
+	public void setStarPoint(int x,int y) {
+		this.startPoint=x;
+		this.startPoint=y;
+	}
+	public void setEndPoint(int x,int y) {
+		this.endPoint=x;
+		this.endPoint=y;
+	}
+	*/
+
+
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		if (flag) {
+			g.drawLine(startpoint.x,startpoint.y,endpoint.x,endpoint.y);
+		}
+		
+		g.setColor(currentColor);
+	}
+	
+	public void setC(Color c) {
+		this.currentColor=c;
+	}
+}
